@@ -5,8 +5,8 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import { OrderSuccess } from "./OrderSuccess";
-import { OrderForm } from "./OrderForm";
+import { OrderSuccess } from "./Success";
+import { OrderForm } from "./Form";
 
 export function OrderDialog(props: any) {
   const { isOpen, close, productId } = props;
@@ -38,7 +38,7 @@ export function OrderDialog(props: any) {
                     Order successfull
                   </DialogTitle>
 
-                  <OrderSuccess />
+                  <OrderSuccess close={close} />
                 </>
               ) : (
                 <>

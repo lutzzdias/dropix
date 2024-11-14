@@ -1,7 +1,7 @@
 import { Button } from "@headlessui/react";
 import { useState } from "react";
-import { BestChoiceIcon } from "./Icons";
-import { OrderDialog } from "./OrderDialog";
+import { BestChoiceIcon } from "../icons";
+import { OrderDialog } from "../Order/Dialog";
 
 export function ProductCard(props: { product: any }) {
   const {

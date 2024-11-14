@@ -1,7 +1,53 @@
 import { useEffect, useState } from "react";
-import { ProductList } from "./components/ProductList";
 import { VideoArea } from "./components/VideoArea";
 import api from "./api";
+import { ProductList } from "./components/Product/List";
+
+const products = [
+  {
+    product_id: 1,
+    name: "Product 1",
+    price: 100,
+    freight: "Free shipping",
+    image_url: "https://github.com/lutzzdias.png",
+    discount: 10,
+    best_choice: true,
+  },
+  {
+    product_id: 2,
+    name: "Product 2",
+    price: 200,
+    freight: "Free shipping",
+    image_url: "https://github.com/lutzzdias.png",
+    discount: 0,
+    best_choice: false,
+  },
+  {
+    product_id: 3,
+    name: "Product 3",
+    price: 300,
+    freight: "Free shipping",
+    image_url: "https://github.com/lutzzdias.png",
+    discount: 30,
+    best_choice: false,
+  },
+  {
+    product_id: 4,
+    name: "Product 4",
+    price: 400,
+    freight: "Free shipping",
+    image_url: "https://github.com/lutzzdias.png",
+    discount: 0,
+    best_choice: false,
+  },
+];
+
+const localData = {
+  video_headline: "The best products for you",
+  video_sub_headline: "Check out our selection of products",
+  video_url: "https://youtu.be/VxZMiyhEAi0?si=dK9HYHtHxuBAPQK4",
+  products: products,
+};
 
 export function App() {
   const [data, setData] = useState<any>(localData);

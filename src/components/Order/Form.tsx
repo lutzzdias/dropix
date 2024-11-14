@@ -1,8 +1,9 @@
 import { Button } from "@headlessui/react";
-import { TextField } from "./TextField";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import api from "../../api";
+import { TextField } from "../TextField";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -33,29 +34,10 @@ export function OrderForm(props: any) {
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const requestBody = data;
-
-    try {
-      const response = await fetch(
-        `https://api-candidate.ogruposix.com/buy/${productId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "user-token": "2A50C22E-7954-4C73-9CF9-F6D298C047A7",
-          },
-          body: JSON.stringify(requestBody),
-        },
-      );
-
-      if (response.ok) {
-        setOrderSuccess(true);
-      } else {
-        alert("Failed to place order. Please try again.");
-      }
-    } catch (error) {
-      alert("An error occurred. Please try again later.");
-    }
+    api
+      .postOrder({ ...data, product_id: productId })
+      .then(() => setSuccess(true))
+      .catch((error) => alert(error));
   }
 
   return (

@@ -1,6 +1,7 @@
 import { Button } from "@headlessui/react";
 
-export function OrderSuccess() {
+export function OrderSuccess(props: any) {
+  const { close } = props;
   return (
     <>
       <p className="mt-2 text-sm/6 text-gray-900/50">

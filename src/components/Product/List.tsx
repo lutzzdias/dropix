@@ -1,4 +1,4 @@
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "./Card";
 
 export function ProductList(props: any) {
   const { products } = props;
