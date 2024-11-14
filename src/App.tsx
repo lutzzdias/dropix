@@ -3,6 +3,7 @@ import { VideoArea } from "./components/VideoArea";
 import api from "./api";
 import { ProductList } from "./components/Product/List";
 import { Product } from "./types";
+import { NavBar } from "./components/NavBar";
 
 const products: Product[] = [
   {
@@ -61,7 +62,8 @@ export function App() {
   }, []);
 
   return (
-    <div className="flex max-w-5xl flex-col gap-6">
+    <div className="flex max-w-5xl flex-col gap-4 p-4">
+      <NavBar />
       <VideoArea
         info={{
           title: data.video_headline,
