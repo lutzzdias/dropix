@@ -4,7 +4,7 @@ const apiClient = axios.create({
   baseURL: "https://api-candidate.ogruposix.com",
   headers: {
     "Content-Type": "application/json",
-    "user-token": "2A50C22E-7954-4C73-9CF9-F6D298C047A7",
+    "user-token": import.meta.env.VITE_USER_TOKEN,
   },
 });
 
