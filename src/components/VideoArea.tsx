@@ -12,7 +12,7 @@ export function VideoArea(props: VideoAreaProps) {
   const { title, subtitle, url } = props.info;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 rounded-xl bg-gray-50 px-8 py-4">
       <div>
         <h2 className="text-balance text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
           {title}

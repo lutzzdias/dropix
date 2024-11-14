@@ -42,8 +42,8 @@ export function OrderForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2.5">
-      <div className="flex flex-col gap-2.5">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1">
         <h4 className="text-base font-medium text-gray-900">
           Personal information
         </h4>
@@ -70,7 +70,7 @@ export function OrderForm() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-1">
         <h4 className="text-base font-medium text-gray-900">Address</h4>
 
         <div className="flex flex-col gap-2">
