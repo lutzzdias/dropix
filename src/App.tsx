@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { VideoArea } from "./components/VideoArea";
 import api from "./api";
 import { ProductList } from "./components/Product/List";
+import { Product } from "./types";
 
-const products = [
+const products: Product[] = [
   {
     product_id: 1,
     name: "Product 1",
@@ -50,7 +51,7 @@ const localData = {
 };
 
 export function App() {
-  const [data, setData] = useState<any>(localData);
+  const [data, setData] = useState(localData);
 
   useEffect(() => {
     api

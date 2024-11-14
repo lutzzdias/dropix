@@ -1,7 +1,16 @@
 import { Field, Input, Label } from "@headlessui/react";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
-export function TextField(props: any) {
-  const { label, placeholder, type = "text", errors, register } = props;
+type TextFieldProps = {
+  register: UseFormRegisterReturn;
+  label: string;
+  placeholder: string;
+  type?: string;
+  errors?: FieldError;
+};
+
+export function TextField(props: TextFieldProps) {
+  const { register, label, placeholder, type = "text", errors } = props;
 
   return (
     <Field className="w-full">

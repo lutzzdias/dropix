@@ -1,6 +1,11 @@
 import { Button } from "@headlessui/react";
+import { MouseEventHandler } from "react";
 
-export function OrderSuccess(props: any) {
+type OrderSuccessProps = {
+  close: MouseEventHandler | ((value: boolean) => void);
+};
+
+export function OrderSuccess(props: OrderSuccessProps) {
   const { close } = props;
   return (
     <>
@@ -9,7 +14,7 @@ export function OrderSuccess(props: any) {
       </p>
       <Button
         className="rounded-md px-3 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm ring-1 ring-gray-700 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-        onClick={close}
+        onClick={close as MouseEventHandler}
       >
         Close
       </Button>

@@ -2,8 +2,14 @@ import { Button } from "@headlessui/react";
 import { useState } from "react";
 import { BestChoiceIcon } from "../icons";
 import { OrderDialog } from "../Order/Dialog";
+import { Product } from "../../types";
+import { Price } from "./Price";
 
-export function ProductCard(props: { product: any }) {
+type ProductCardProps = {
+  product: Product;
+};
+
+export function ProductCard(props: ProductCardProps) {
   const {
     product_id: id,
     name,
@@ -38,23 +44,7 @@ export function ProductCard(props: { product: any }) {
           <h4 className="line-clamp-1 text-sm text-gray-700">{name}</h4>
           <p className="text-sm text-gray-500">{freight}</p>
         </div>
-        <div>
-          {discount !== 0 && (
-            <p className="text-sm font-medium text-gray-900">
-              ${(price - discount).toFixed(2)}
-            </p>
-          )}
-
-          {discount !== 0 ? (
-            <p className="text-end text-xs font-medium text-red-600 text-opacity-80 line-through">
-              ${price.toFixed(2)}
-            </p>
-          ) : (
-            <p className="text-sm font-medium text-gray-900">
-              ${price.toFixed(2)}
-            </p>
-          )}
-        </div>
+        <Price price={price} discount={discount} />
       </div>
       <Button
         className="flex w-full justify-center rounded-md bg-gray-100 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"

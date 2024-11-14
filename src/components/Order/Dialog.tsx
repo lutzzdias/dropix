@@ -8,7 +8,13 @@ import { useState } from "react";
 import { OrderSuccess } from "./Success";
 import { OrderForm } from "./Form";
 
-export function OrderDialog(props: any) {
+type OrderDialogProps = {
+  isOpen: boolean;
+  close: (value: boolean) => void;
+  productId: number;
+};
+
+export function OrderDialog(props: OrderDialogProps) {
   const { isOpen, close, productId } = props;
 
   const [success, setSuccess] = useState(false);

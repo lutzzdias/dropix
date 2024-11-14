@@ -1,6 +1,14 @@
 import { buildEmbedUrl } from "../util/url";
 
-export function VideoArea(props: any) {
+type VideoAreaProps = {
+  info: {
+    title: string;
+    subtitle: string;
+    url: string;
+  };
+};
+
+export function VideoArea(props: VideoAreaProps) {
   const { title, subtitle, url } = props.info;
 
   return (

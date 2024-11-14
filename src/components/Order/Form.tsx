@@ -4,6 +4,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../api";
 import { TextField } from "../TextField";
+import { MouseEventHandler } from "react";
+
+type OrderFormProps = {
+  setSuccess: Function;
+  productId: number;
+  close: MouseEventHandler | ((value: boolean) => void);
+};
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -22,7 +29,7 @@ const formSchema = z.object({
   state: z.string().min(1, "State is required"),
 });
 
-export function OrderForm(props: any) {
+export function OrderForm(props: OrderFormProps) {
   const { setSuccess, productId, close } = props;
 
   const {
@@ -123,7 +130,7 @@ export function OrderForm(props: any) {
       <div className="flex justify-between">
         <Button
           className="rounded-md px-3 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm ring-1 ring-red-700 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-          onClick={close}
+          onClick={close as MouseEventHandler}
         >
           Cancel
         </Button>

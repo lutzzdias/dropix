@@ -1,6 +1,11 @@
+import { Product } from "../../types";
 import { ProductCard } from "./Card";
 
-export function ProductList(props: any) {
+type ProductListProps = {
+  products: Product[];
+};
+
+export function ProductList(props: ProductListProps) {
   const { products } = props;
 
   return (
@@ -10,7 +15,7 @@ export function ProductList(props: any) {
       </h2>
 
       <div className="grid grid-cols-1 justify-items-center gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        {products.map((product: any) => (
+        {products.map((product) => (
           <ProductCard key={product.product_id} product={product} />
         ))}
       </div>
