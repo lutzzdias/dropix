@@ -5,6 +5,13 @@ title, subtitle, video url and products list from an external API and displays
 them to the user. On clicking to order a product a Dialog is opened for the user
 to enter their information which is then sent to the external API.
 
+In order to run the project:
+
+1. clone the repo (`git clone git@github.com:lutzzdias/dropix.git`)
+2. install dependencies (`npm i`)
+3. create .env file with API token (with the name defined in `.env.example`)
+4. run project (`npm run dev`)
+
 Although the complexity of the project is small, there is an API handler to deal
 with communication with the external API which better separates the concerns of
 each layer. Additionaly, a context has been set up to avoid prop drilling within
