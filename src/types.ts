@@ -8,6 +8,13 @@ export type Product = {
   best_choice: boolean;
 };
 
+export type Data = {
+  video_headline: string;
+  video_sub_headline: string;
+  video_url: string;
+  products: Product[];
+};
+
 export type DialogContextType = {
   productId: number;
   isOpen: boolean;
