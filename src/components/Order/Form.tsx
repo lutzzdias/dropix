@@ -48,7 +48,7 @@ export function OrderForm(props: OrderFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2.5">
       <div className="flex flex-col gap-2.5">
         <h4 className="text-base font-medium text-gray-900">
           Personal information

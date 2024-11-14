@@ -7,6 +7,7 @@ type OrderSuccessProps = {
 
 export function OrderSuccess(props: OrderSuccessProps) {
   const { close } = props;
+
   return (
     <>
       <p className="mt-2 text-sm/6 text-gray-900/50">

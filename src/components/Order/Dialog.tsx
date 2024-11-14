@@ -19,13 +19,18 @@ export function OrderDialog(props: OrderDialogProps) {
 
   const [success, setSuccess] = useState(false);
 
+  const handleClose = (e: any) => {
+    close(e);
+    setSuccess(false);
+  };
+
   return (
     <>
       <Dialog
         open={isOpen}
         as="div"
         className="relative z-10 transition duration-300 ease-out focus:outline-none data-[closed]:opacity-0"
-        onClose={close}
+        onClose={handleClose}
         transition
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
@@ -35,32 +40,20 @@ export function OrderDialog(props: OrderDialogProps) {
               transition
               className="flex w-full max-w-lg flex-col gap-6 rounded-lg bg-white p-6 shadow-md"
             >
+              <DialogTitle
+                as="h3"
+                className="text-xl font-medium text-gray-900"
+              >
+                {success ? "Order successfull" : "Register order"}
+              </DialogTitle>
               {success ? (
-                <>
-                  <DialogTitle
-                    as="h3"
-                    className="text-xl font-medium text-gray-900"
-                  >
-                    Order successfull
-                  </DialogTitle>
-
-                  <OrderSuccess close={close} />
-                </>
+                <OrderSuccess close={handleClose} />
               ) : (
-                <>
-                  <DialogTitle
-                    as="h3"
-                    className="text-xl font-medium text-gray-900"
-                  >
-                    Register order
-                  </DialogTitle>
-
-                  <OrderForm
-                    setSuccess={setSuccess}
-                    productId={productId}
-                    close={close}
-                  />
-                </>
+                <OrderForm
+                  setSuccess={setSuccess}
+                  productId={productId}
+                  close={close}
+                />
               )}
             </DialogPanel>
           </div>
