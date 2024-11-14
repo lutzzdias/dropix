@@ -1,12 +1,15 @@
 import { Button } from "@headlessui/react";
-import { MouseEventHandler } from "react";
+import { useDialogContext } from "../../context/DialogContext";
 
-type OrderSuccessProps = {
-  close: MouseEventHandler | ((value: boolean) => void);
-};
+export function OrderSuccess() {
+  const { setIsOpen, setSuccess } = useDialogContext();
 
-export function OrderSuccess(props: OrderSuccessProps) {
-  const { close } = props;
+  const handleClose = () => {
+    setIsOpen(false);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 100);
+  };
 
   return (
     <>
@@ -15,7 +18,7 @@ export function OrderSuccess(props: OrderSuccessProps) {
       </p>
       <Button
         className="rounded-md px-3 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm ring-1 ring-gray-700 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-        onClick={close as MouseEventHandler}
+        onClick={handleClose}
       >
         Close
       </Button>

@@ -4,24 +4,18 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { useState } from "react";
 import { OrderSuccess } from "./Success";
 import { OrderForm } from "./Form";
+import { useDialogContext } from "../../context/DialogContext";
 
-type OrderDialogProps = {
-  isOpen: boolean;
-  close: (value: boolean) => void;
-  productId: number;
-};
+export function OrderDialog() {
+  const { isOpen, setIsOpen, success, setSuccess } = useDialogContext();
 
-export function OrderDialog(props: OrderDialogProps) {
-  const { isOpen, close, productId } = props;
-
-  const [success, setSuccess] = useState(false);
-
-  const handleClose = (e: any) => {
-    close(e);
-    setSuccess(false);
+  const handleClose = () => {
+    setIsOpen(false);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 100);
   };
 
   return (
@@ -46,15 +40,7 @@ export function OrderDialog(props: OrderDialogProps) {
               >
                 {success ? "Order successfull" : "Register order"}
               </DialogTitle>
-              {success ? (
-                <OrderSuccess close={handleClose} />
-              ) : (
-                <OrderForm
-                  setSuccess={setSuccess}
-                  productId={productId}
-                  close={close}
-                />
-              )}
+              {success ? <OrderSuccess /> : <OrderForm />}
             </DialogPanel>
           </div>
         </div>

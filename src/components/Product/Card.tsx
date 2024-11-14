@@ -1,9 +1,9 @@
 import { Button } from "@headlessui/react";
-import { useState } from "react";
 import { BestChoiceIcon } from "../icons";
 import { OrderDialog } from "../Order/Dialog";
 import { Product } from "../../types";
 import { Price } from "./Price";
+import { useDialogContext } from "../../context/DialogContext";
 
 type ProductCardProps = {
   product: Product;
@@ -20,7 +20,7 @@ export function ProductCard(props: ProductCardProps) {
     best_choice: favorite,
   } = props.product;
 
-  let [isFormOpen, setIsFormOpen] = useState(false);
+  let { setIsOpen } = useDialogContext();
 
   return (
     <div
@@ -48,15 +48,11 @@ export function ProductCard(props: ProductCardProps) {
       </div>
       <Button
         className="flex w-full justify-center rounded-md bg-gray-100 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-        onClick={() => setIsFormOpen(true)}
+        onClick={() => setIsOpen(true)}
       >
         Order
       </Button>
-      <OrderDialog
-        isOpen={isFormOpen}
-        close={() => setIsFormOpen(false)}
-        productId={id}
-      />
+      <OrderDialog />
     </div>
   );
 }

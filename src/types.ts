@@ -7,3 +7,11 @@ export type Product = {
   discount: number;
   best_choice: boolean;
 };
+
+export type DialogContextType = {
+  productId: number;
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+  success: boolean;
+  setSuccess: (value: boolean) => void;
+};

@@ -1,3 +1,4 @@
+import { DialogContextProvider } from "../../context/DialogContext";
 import { Product } from "../../types";
 import { ProductCard } from "./Card";
 
@@ -16,7 +17,9 @@ export function ProductList(props: ProductListProps) {
 
       <div className="grid grid-cols-1 justify-items-center gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         {products.map((product) => (
-          <ProductCard key={product.product_id} product={product} />
+          <DialogContextProvider productId={product.product_id}>
+            <ProductCard key={product.product_id} product={product} />
+          </DialogContextProvider>
         ))}
       </div>
     </div>
