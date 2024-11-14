@@ -7,38 +7,38 @@ import {
 } from "@headlessui/react";
 import { TextField } from "./TextField";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().min(1, "E-mail is required").email("Invalid e-mail"),
+  phone_number: z.string().min(8, "Phone number is required"),
+  street_number: z.coerce
+    .number()
+    .min(1, "Street number is required")
+    .positive("Invalid street number"),
+  street: z.string().min(1, "Street is required"),
+  district: z.string().min(1, "District is required"),
+  city: z.string().min(1, "City is required"),
+  state: z.string().min(1, "State is required"),
+});
 
 export function OrderForm(props: any) {
   const { isOpen, close, productId } = props;
 
   const [orderSuccess, setOrderSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    street: "",
-    number: "",
-    district: "",
-    city: "",
-    state: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
   });
 
-  function handleChange(name: string, value: string) {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  }
-
-  async function order() {
-    const requestBody = {
-      name: formData.name,
-      email: formData.email,
-      phone_number: formData.phone,
-      street_number: +formData.number,
-      street: formData.street,
-      district: formData.district,
-      city: formData.city,
-      state: formData.state,
-      product_id: +productId,
-    };
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    const requestBody = data;
 
     try {
       const response = await fetch(
@@ -100,7 +100,7 @@ export function OrderForm(props: any) {
                 </>
               )}
               {!orderSuccess && (
-                <>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <DialogTitle
                     as="h3"
                     className="text-xl font-medium text-gray-900"
@@ -115,28 +115,22 @@ export function OrderForm(props: any) {
 
                     <div className="flex flex-col gap-2">
                       <TextField
+                        register={register("name")}
                         label="Name"
                         placeholder="John Doe"
-                        value={formData.name}
-                        onChange={(value: string) =>
-                          handleChange("name", value)
-                        }
+                        errors={errors.name}
                       />
                       <TextField
+                        register={register("email")}
                         label="Email"
                         placeholder="johndoe@gmail.com"
-                        value={formData.email}
-                        onChange={(value: string) =>
-                          handleChange("email", value)
-                        }
+                        errors={errors.email}
                       />
                       <TextField
+                        register={register("phone_number")}
                         label="Phone"
                         placeholder="(12) 3456-7890"
-                        value={formData.phone}
-                        onChange={(value: string) =>
-                          handleChange("phone", value)
-                        }
+                        errors={errors.phone_number}
                       />
                     </div>
                   </div>
@@ -150,54 +144,44 @@ export function OrderForm(props: any) {
                       <div className="flex w-full gap-4">
                         <div className="flex-1">
                           <TextField
+                            register={register("street")}
                             label="Street"
                             placeholder="Elm Street"
-                            value={formData.street}
-                            onChange={(value: string) =>
-                              handleChange("street", value)
-                            }
+                            errors={errors.street}
                           />
                         </div>
                         <div className="w-32">
                           <TextField
+                            register={register("street_number")}
                             label="Number"
                             placeholder="42"
-                            value={formData.number}
-                            onChange={(value: string) =>
-                              handleChange("number", value)
-                            }
+                            errors={errors.street_number}
                           />
                         </div>
                       </div>
 
                       <TextField
+                        register={register("district")}
                         label="District"
                         placeholder="Downtown"
-                        value={formData.district}
-                        onChange={(value: string) =>
-                          handleChange("district", value)
-                        }
+                        errors={errors.district}
                       />
 
                       <div className="flex w-full gap-4">
                         <div className="flex-1">
                           <TextField
+                            register={register("city")}
                             label="City"
                             placeholder="Anytown"
-                            value={formData.city}
-                            onChange={(value: string) =>
-                              handleChange("city", value)
-                            }
+                            errors={errors.city}
                           />
                         </div>
                         <div className="w-32">
                           <TextField
+                            register={register("state")}
                             label="State"
                             placeholder="Nowhere"
-                            value={formData.state}
-                            onChange={(value: string) =>
-                              handleChange("state", value)
-                            }
+                            errors={errors.state}
                           />
                         </div>
                       </div>
@@ -213,12 +197,12 @@ export function OrderForm(props: any) {
                     </Button>
                     <Button
                       className="rounded-md px-3 py-1.5 text-sm/6 font-semibold text-gray-700 shadow-sm ring-1 ring-green-700 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                      onClick={order}
+                      type="submit"
                     >
                       Confirm
                     </Button>
                   </div>
-                </>
+                </form>
               )}
             </DialogPanel>
           </div>
