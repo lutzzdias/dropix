@@ -35,7 +35,7 @@ export function ProductCard(props: { product: any }) {
       </div>
       <div className="flex justify-between">
         <div>
-          <h4 className="text-sm text-gray-700">{name}</h4>
+          <h4 className="line-clamp-1 text-sm text-gray-700">{name}</h4>
           <p className="text-sm text-gray-500">{freight}</p>
         </div>
         <div>
