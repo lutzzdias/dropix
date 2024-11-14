@@ -3,8 +3,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import api from "../../api";
-import { TextField } from "../TextField";
 import { useDialogContext } from "../../context/DialogContext";
+import { TextField } from "../TextField";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -12,11 +12,11 @@ const formSchema = z.object({
   phone_number: z
     .string()
     .min(1, "Phone number is required")
-    .min(8, "Invalid phone number"),
-  street_number: z.coerce
-    .number()
+    .regex(/^\(\d{2}\)\s\d{4}-\d{4}$/, "Invalid phone number"),
+  street_number: z
+    .string()
     .min(1, "Street number is required")
-    .positive("Invalid street number"),
+    .regex(/^\d+$/, "Street number must contain only numbers"),
   street: z.string().min(1, "Street is required"),
   district: z.string().min(1, "District is required"),
   city: z.string().min(1, "City is required"),
@@ -66,6 +66,7 @@ export function OrderForm() {
             label="Phone"
             placeholder="(12) 3456-7890"
             errors={errors.phone_number}
+            mask="(99) 9999-9999"
           />
         </div>
       </div>
